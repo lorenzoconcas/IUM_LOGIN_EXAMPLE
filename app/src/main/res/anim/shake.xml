@@ -4,6 +4,6 @@
         android:fromXDelta="-5%"
         android:repeatCount="5"
         android:repeatMode="reverse"
-        android:toXDelta="5%"/>
-    android:interpolator="@android:anim/linear_interpolator"
+        android:toXDelta="5%"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
 </set>

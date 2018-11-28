@@ -6,4 +6,5 @@
     <string name="password_field_text">Password</string>
     <string name="close_activity_button">Indietro</string>
     <string name="useless_image_desc" />
+
 </resources>
