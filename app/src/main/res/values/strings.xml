@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LoginForm</string>
+    <string name="register_text">Premi qui per registrarti</string>
+    <string name="login_button">ACCEDI</string>
+    <string name="username_field_text">Username</string>
+    <string name="password_field_text">Password</string>
+    <string name="close_activity_button">Indietro</string>
+    <string name="useless_image_desc" />
+</resources>
