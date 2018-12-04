@@ -1,31 +1,16 @@
 package lorenzolconcas.loginform;
 
-import android.animation.ObjectAnimator;
-import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.os.StatFs;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import lorenzolconcas.loginform.Utils.Behavior;
+import lorenzolconcas.loginform.data.Database;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //init del db
+        Database db = new Database();
+
+
         //gestione dell'aspetto
 
         setContentView(R.layout.main);
@@ -45,11 +34,18 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         try {
             getSupportActionBar().hide();
-        }catch(Exception e){
+        }catch(NullPointerException e){
             e.printStackTrace();
         }
 
-
+        TextView register = findViewById(R.id.register_button);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(getApplicationContext(), Registration.class);
+                startActivity(myIntent);
+            }
+        });
 
 
         //assegno una funzione al tasto login
@@ -71,13 +67,13 @@ public class MainActivity extends AppCompatActivity {
         EditText usernameField = findViewById(R.id.usernameField);
         EditText passwordField = findViewById(R.id.passwordField);
 
+        Behavior b = new Behavior();
 
-
-        if(isEmpty(usernameField) || isEmpty(passwordField)){
+        if(b.isEmpty(usernameField) || b.isEmpty(passwordField)){
             Toast toast = Toast.makeText(getApplicationContext(), "Username o password vuoti", Toast.LENGTH_SHORT);
             toast.show();
-            ReactIfEmpty(usernameField);
-            ReactIfEmpty(passwordField);
+            b.ReactIfEmpty(this,usernameField);
+            b.ReactIfEmpty(this, passwordField);
         }else{
             Intent myIntent = new Intent(this, LoggedResult.class);
             myIntent.putExtra("username", usernameField.getText().toString()); //Optional parameters
@@ -86,39 +82,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    private boolean isEmpty(EditText etText) {
-        return etText.getText().toString().trim().length() == 0;
-    }
 
-
-    public void ReactIfEmpty(final EditText editText){
-        if(isEmpty(editText)) {
-            GradientDrawable gd = new GradientDrawable();
-            gd.setColor(Color.WHITE);
-            gd.setCornerRadius(5);
-            gd.setStroke(5, Color.RED);
-            editText.setBackground(gd);
-
-
-            final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
-
-            editText.startAnimation(animShake);
-
-            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-
-                    if(hasFocus){
-                        GradientDrawable gd = new GradientDrawable();
-                        gd.setColor(Color.WHITE);
-                        gd.setCornerRadius(5);
-                        gd.setStroke(5, Color.WHITE);
-                        editText.setBackground(gd);
-                    }
-                }
-            });
-
-        }
-    }
 }

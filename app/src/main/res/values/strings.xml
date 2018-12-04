@@ -6,5 +6,13 @@
     <string name="password_field_text">Password</string>
     <string name="close_activity_button">Indietro</string>
     <string name="useless_image_desc" />
+    <string name="confirm_password">Conferma Password</string>
+    <string name="register">Registrati</string>
+    <string name="password_not_match">Le password non corrispondono</string>
+    <string name="access_denied">Accesso negato</string>
+    <string name="greeting">Benvenuto</string>
+    <string name="registered">Registrato</string>
+    <string name="username_already_taken">Username già utilizzato</string>
+    <string name="insert_all_information">Inserisci tutte le informazioni</string>
 
 </resources>

@@ -8,15 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+import lorenzolconcas.loginform.data.Database;
 
 public class LoggedResult extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_logged_result);
-        List<User> userList = buildList();
+        Database db = Database.getPersist();
 
         super.onCreate(savedInstanceState);
 
@@ -45,24 +44,12 @@ public class LoggedResult extends AppCompatActivity {
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         String password = intent.getStringExtra("password");
-        if(Login(userList, username, password))
-            result.setText("Benvenuto "+username);
+        if(db.Login(username, password))
+            result.setText(getString(R.string.greeting)+username);
         else
-            result.setText("Nome utente o password errati");
+            result.setText(R.string.access_denied);
     }
 
-    private List<User> buildList(){
-        List<User> tmp = new ArrayList<>();
-        tmp.add(new User("lore_designer", "ciao"));
-        tmp.add(new User("test", "test"));
-        return tmp;
-    }
-    private boolean Login(List<User> users,String username, String password){
-        for (User u : users) {
-            if(u.getUserName().equals(username) && u.getPassword().equals(password)){
-                return  true;
-            }
-        }
-        return false;
-    }
+
+
 }
