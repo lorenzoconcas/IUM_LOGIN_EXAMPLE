@@ -45,7 +45,7 @@ public class LoggedResult extends AppCompatActivity {
         String username = intent.getStringExtra("username");
         String password = intent.getStringExtra("password");
         if(db.Login(username, password))
-            result.setText(getString(R.string.greeting)+username);
+            result.setText(getString(R.string.greeting)+" "+username);
         else
             result.setText(R.string.access_denied);
     }
