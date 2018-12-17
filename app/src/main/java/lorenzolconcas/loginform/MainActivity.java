@@ -2,6 +2,8 @@ package lorenzolconcas.loginform;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,19 +27,23 @@ public class MainActivity extends AppCompatActivity {
         //gestione dell'aspetto
 
         setContentView(R.layout.main);
-       
+
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
-
+        //colore della statusbar
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         try {
-            getSupportActionBar().hide();
+
+                ActionBar ab = getSupportActionBar();
+                ab.hide();
         }catch(NullPointerException e){
             e.printStackTrace();
         }
 
+        //setta un click listener alla view che mostra il tasto "registra"
+        //non era da fare ma l'ho fatto per me
         TextView register = findViewById(R.id.register_button);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,9 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
     private void Login(){
 
-
+        //Controllo che i due campi di testo non siano vuoti e procedo a chiamare una seconda activity
         EditText usernameField = findViewById(R.id.usernameField);
         EditText passwordField = findViewById(R.id.passwordField);
 
