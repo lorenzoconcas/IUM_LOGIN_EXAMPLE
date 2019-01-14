@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
         //setta un click listener alla view che mostra il tasto "registra"
         //non era da fare ma l'ho fatto per me
-        TextView register = findViewById(R.id.register_button);
+        /*TextView register = findViewById(R.id.register_button);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(getApplicationContext(), Registration.class);
                 startActivity(myIntent);
             }
-        });
+        });*/
 
 
         //assegno una funzione al tasto login
